@@ -1,0 +1,64 @@
+<div class="aviso sucesso" *ngIf="mensagem">{{ mensagem }}</div>
+<div class="aviso falha" *ngIf="erro">{{ erro }}</div>
+
+<!-- Listagem -->
+<section class="painel" *ngIf="!exibindoFormulario">
+  <div class="barra">
+    <h2>Clientes <small>({{ clientes.length }})</small></h2>
+    <div class="acoes-barra">
+      <input type="search" placeholder="Filtrar por nome, CPF/CNPJ ou e-mail" [(ngModel)]="filtro" />
+      <button type="button" class="botao" (click)="novo()">+ Novo cliente</button>
+    </div>
+  </div>
+
+  <p class="vazio" *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando">
+    <thead>
+      <tr>
+        <th>ID</th><th>Nome</th><th>CPF/CNPJ</th><th>Telefone</th><th>E-mail</th><th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of clientesFiltrados">
+        <td>{{ c.idCliente }}</td>
+        <td>{{ c.nomeCliente }}</td>
+        <td>{{ c.cpfCnpj }}</td>
+        <td>{{ c.telefone }}</td>
+        <td>{{ c.email }}</td>
+        <td class="acoes">
+          <button type="button" class="botao pequeno" (click)="editar(c)">Editar</button>
+          <button type="button" class="botao pequeno excluir" (click)="excluir(c)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="vazio" *ngIf="!carregando && clientesFiltrados.length === 0">Nenhum cliente encontrado.</p>
+</section>
+
+<!-- Cadastro e edição -->
+<section class="painel" *ngIf="exibindoFormulario">
+  <h2>{{ editandoId === null ? 'Novo cliente' : 'Editar cliente #' + editandoId }}</h2>
+  <form #f="ngForm" (ngSubmit)="salvar(f)">
+    <label>Nome
+      <input name="nomeCliente" [(ngModel)]="formulario.nomeCliente" required maxlength="100" #nome="ngModel" />
+      <small *ngIf="nome.invalid && nome.touched">Informe o nome.</small>
+    </label>
+    <label>CPF/CNPJ
+      <input name="cpfCnpj" [(ngModel)]="formulario.cpfCnpj" required maxlength="18" #doc="ngModel" />
+      <small *ngIf="doc.invalid && doc.touched">Informe o CPF ou CNPJ.</small>
+    </label>
+    <label>Telefone
+      <input name="telefone" [(ngModel)]="formulario.telefone" required maxlength="20" #tel="ngModel" />
+      <small *ngIf="tel.invalid && tel.touched">Informe o telefone.</small>
+    </label>
+    <label>E-mail
+      <input type="email" name="email" [(ngModel)]="formulario.email" required email maxlength="100" #em="ngModel" />
+      <small *ngIf="em.invalid && em.touched">Informe um e-mail válido.</small>
+    </label>
+    <div class="botoes">
+      <button type="submit" class="botao" [disabled]="salvando">{{ salvando ? 'Salvando...' : 'Salvar' }}</button>
+      <button type="button" class="botao cinza" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</section>

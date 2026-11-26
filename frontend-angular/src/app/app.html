@@ -1,0 +1,23 @@
+<div class="topo">
+  <h1>Produtora de Vídeo</h1>
+  <span>Angular 22 + API Spring Boot</span>
+</div>
+
+<nav class="menu">
+  <button type="button" [class.ativo]="aba() === 'clientes'" (click)="abrir('clientes')">Clientes</button>
+  <button type="button" [class.ativo]="aba() === 'projetos'" (click)="abrir('projetos')">Projetos</button>
+  <button type="button" [class.ativo]="aba() === 'entregas'" (click)="abrir('entregas')">Entregas</button>
+</nav>
+
+<main class="conteudo">
+  @switch (aba()) {
+    @case ('clientes') { <app-clientes /> }
+    @case ('projetos') { <app-projetos /> }
+    @case ('entregas') { <app-entregas /> }
+  }
+</main>
+
+<footer>
+  Os dados vêm da mesma API REST usada no Postman. A interface Thymeleaf continua em
+  <code>http://localhost:8080/web/clientes</code>.
+</footer>

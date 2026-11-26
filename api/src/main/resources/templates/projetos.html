@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projetos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topo">
+        <h1>Produtora de Vídeo</h1>
+    </div>
+    <div class="menu">
+        <a href="/web/clientes">Clientes</a>
+        <a href="/web/projetos">Projetos</a>
+        <a href="/web/entregas">Entregas</a>
+    </div>
+
+    <div class="conteudo">
+
+    <h2>Projetos de Vídeo</h2>
+    <a class="botao" href="/web/projetos/novo">Novo projeto</a>
+    <br><br>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Cliente</th>
+            <th>Início</th>
+            <th>Entrega</th>
+            <th>Orçamento</th>
+            <th></th>
+        </tr>
+        <tr th:each="p : ${projetos}">
+            <td th:text="${p.idProjeto}"></td>
+            <td th:text="${p.tituloProjeto}"></td>
+            <td th:text="${p.cliente.nomeCliente}"></td>
+            <td th:text="${p.dataInicio}"></td>
+            <td th:text="${p.dataEntrega}"></td>
+            <td th:text="${p.orcamento}"></td>
+            <td>
+                <a class="editar" th:href="@{/web/projetos/editar/{id}(id=${p.idProjeto})}">Editar</a>
+                <a class="excluir" th:href="@{/web/projetos/excluir/{id}(id=${p.idProjeto})}">Excluir</a>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

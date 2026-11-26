@@ -1,0 +1,434 @@
+{
+  "info": {
+    "name": "API Produtora de Vídeo (Spring Boot + Lombok)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/clientes/buscar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "buscar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/clientes/buscar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "buscar",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar por nome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/clientes/buscar/nome/Estúdio",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "buscar",
+                "nome",
+                "Estúdio"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/clientes/salvar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "salvar"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeCliente\": \"Estúdio Teste\",\n  \"cpfCnpj\": \"11.222.333/0001-44\",\n  \"telefone\": \"(11) 4000-1234\",\n  \"email\": \"contato@estudioteste.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/clientes/atualizar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "atualizar",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nomeCliente\": \"Estúdio Teste\",\n  \"cpfCnpj\": \"11.222.333/0001-44\",\n  \"telefone\": \"(11) 4000-1234\",\n  \"email\": \"contato@estudioteste.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Excluir",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/clientes/deletar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "clientes",
+                "deletar",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projetos",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/projetos/buscar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "buscar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/projetos/buscar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "buscar",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Orçamento mínimo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/projetos/buscar/orcamento/5000",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "buscar",
+                "orcamento",
+                "5000"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/projetos/salvar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "salvar"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": 1,\n  \"tituloProjeto\": \"Vídeo institucional\",\n  \"dataInicio\": \"2026-12-01\",\n  \"dataEntrega\": \"2026-12-20\",\n  \"orcamento\": 8500.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/projetos/atualizar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "atualizar",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idCliente\": 1,\n  \"tituloProjeto\": \"Vídeo institucional\",\n  \"dataInicio\": \"2026-12-01\",\n  \"dataEntrega\": \"2026-12-20\",\n  \"orcamento\": 8500.0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Excluir",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/projetos/deletar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "projetos",
+                "deletar",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Entregas",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/entregas/buscar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "buscar"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/entregas/buscar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "buscar",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Por status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/entregas/buscar/status/Aprovado",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "buscar",
+                "status",
+                "Aprovado"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cadastrar",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/entregas/salvar",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "salvar"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProjeto\": 1,\n  \"dataEntrega\": \"2026-12-20\",\n  \"formatoArquivo\": \"MP4\",\n  \"statusEntrega\": \"Pendente\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Atualizar",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base}}/entregas/atualizar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "atualizar",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idProjeto\": 1,\n  \"dataEntrega\": \"2026-12-20\",\n  \"formatoArquivo\": \"MP4\",\n  \"statusEntrega\": \"Pendente\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Excluir",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base}}/entregas/deletar/1",
+              "host": [
+                "{{base}}"
+              ],
+              "path": [
+                "entregas",
+                "deletar",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+<div class="aviso sucesso" *ngIf="mensagem">{{ mensagem }}</div>
+<div class="aviso falha" *ngIf="erro">{{ erro }}</div>
+
+<!-- Listagem -->
+<section class="painel" *ngIf="!exibindoFormulario">
+  <div class="barra">
+    <h2>Projetos de vídeo <small>({{ projetos.length }})</small></h2>
+    <div class="acoes-barra">
+      <input type="search" placeholder="Filtrar por título ou cliente" [(ngModel)]="filtro" />
+      <button type="button" class="botao" (click)="novo()">+ Novo projeto</button>
+    </div>
+  </div>
+
+  <p class="vazio" *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando">
+    <thead>
+      <tr>
+        <th>ID</th><th>Título</th><th>Cliente</th><th>Início</th><th>Entrega</th><th>Orçamento</th><th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of projetosFiltrados">
+        <td>{{ p.idProjeto }}</td>
+        <td>{{ p.tituloProjeto }}</td>
+        <td>{{ p.cliente?.nomeCliente }}</td>
+        <td>{{ p.dataInicio | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ p.dataEntrega | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ p.orcamento | currency: 'BRL' }}</td>
+        <td class="acoes">
+          <button type="button" class="botao pequeno" (click)="editar(p)">Editar</button>
+          <button type="button" class="botao pequeno excluir" (click)="excluir(p)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="vazio" *ngIf="!carregando && projetosFiltrados.length === 0">Nenhum projeto encontrado.</p>
+</section>
+
+<!-- Cadastro e edição -->
+<section class="painel" *ngIf="exibindoFormulario">
+  <h2>{{ editandoId === null ? 'Novo projeto' : 'Editar projeto #' + editandoId }}</h2>
+  <form #f="ngForm" (ngSubmit)="salvar(f)">
+    <label>Cliente
+      <select name="idCliente" [(ngModel)]="formulario.idCliente" required #cli="ngModel">
+        <option [ngValue]="null" disabled>Selecione o cliente</option>
+        <option *ngFor="let c of clientes" [ngValue]="c.idCliente">{{ c.nomeCliente }}</option>
+      </select>
+      <small *ngIf="cli.invalid && cli.touched">Escolha o cliente.</small>
+    </label>
+    <label>Título do projeto
+      <input name="tituloProjeto" [(ngModel)]="formulario.tituloProjeto" required maxlength="150" #tit="ngModel" />
+      <small *ngIf="tit.invalid && tit.touched">Informe o título.</small>
+    </label>
+    <label>Data de início
+      <input type="date" name="dataInicio" [(ngModel)]="formulario.dataInicio" required #ini="ngModel" />
+      <small *ngIf="ini.invalid && ini.touched">Informe a data de início.</small>
+    </label>
+    <label>Data de entrega
+      <input type="date" name="dataEntrega" [(ngModel)]="formulario.dataEntrega" required #ent="ngModel" />
+      <small *ngIf="ent.invalid && ent.touched">Informe a data de entrega.</small>
+    </label>
+    <label>Orçamento (R$)
+      <input type="number" name="orcamento" [(ngModel)]="formulario.orcamento"
+             required min="0" max="99999999.99" step="0.01" #orc="ngModel" />
+      <small *ngIf="orc.invalid && orc.touched">Informe um valor entre 0 e 99.999.999,99.</small>
+    </label>
+    <div class="botoes">
+      <button type="submit" class="botao" [disabled]="salvando">{{ salvando ? 'Salvando...' : 'Salvar' }}</button>
+      <button type="button" class="botao cinza" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</section>

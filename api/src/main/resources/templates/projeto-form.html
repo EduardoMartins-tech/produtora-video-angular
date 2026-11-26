@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topo">
+        <h1>Produtora de Vídeo</h1>
+    </div>
+    <div class="menu">
+        <a href="/web/clientes">Clientes</a>
+        <a href="/web/projetos">Projetos</a>
+        <a href="/web/entregas">Entregas</a>
+    </div>
+
+    <div class="conteudo">
+
+    <h2>Cadastro de Projeto</h2>
+
+    <form th:action="@{/web/projetos/salvar}" th:object="${projeto}" method="post">
+        <input type="hidden" th:field="*{idProjeto}">
+
+        Cliente:<br>
+        <select th:field="*{idCliente}" required>
+            <option value="">Selecione</option>
+            <option th:each="c : ${clientes}" th:value="${c.idCliente}" th:text="${c.nomeCliente}"></option>
+        </select><br><br>
+
+        Título:<br>
+        <input type="text" th:field="*{tituloProjeto}" required><br><br>
+
+        Data de início:<br>
+        <input type="date" th:field="*{dataInicio}" required><br><br>
+
+        Data de entrega:<br>
+        <input type="date" th:field="*{dataEntrega}" required><br><br>
+
+        Orçamento:<br>
+        <input type="number" step="0.01" min="0" max="99999999.99" th:field="*{orcamento}" required><br><br>
+
+        <button class="botao" type="submit">Salvar</button>
+        <a href="/web/projetos">Voltar</a>
+    </form>
+    </div>
+</body>
+</html>

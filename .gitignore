@@ -1,0 +1,15 @@
+# Java / Maven
+api/target/
+*.class
+
+# Angular
+frontend-angular/node_modules/
+frontend-angular/dist/
+frontend-angular/.angular/
+
+# IDE / sistema
+.idea/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db

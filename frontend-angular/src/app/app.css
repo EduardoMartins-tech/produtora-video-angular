@@ -1,0 +1,35 @@
+.topo {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.topo h1 { margin: 0; font-size: 24px; }
+.topo span { color: #bdc3c7; font-size: 14px; }
+
+.menu { background-color: #34495e; padding: 6px 30px; }
+.menu button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 15px;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.menu button:hover { text-decoration: underline; }
+.menu button.ativo { background-color: #2980b9; }
+
+.conteudo { margin: 20px 30px; }
+
+footer { margin: 0 30px 20px; color: #7f8c8d; font-size: 13px; }
+footer code { background: #e8e8e8; padding: 1px 5px; border-radius: 3px; }
+
+@media (max-width: 700px) {
+  .menu, .topo { padding-left: 15px; padding-right: 15px; }
+  .conteudo { margin: 15px; }
+}

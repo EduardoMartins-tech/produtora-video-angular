@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="topo">
+        <h1>Produtora de Vídeo</h1>
+    </div>
+    <div class="menu">
+        <a href="/web/clientes">Clientes</a>
+        <a href="/web/projetos">Projetos</a>
+        <a href="/web/entregas">Entregas</a>
+    </div>
+
+    <div class="conteudo">
+
+    <h2>Clientes</h2>
+    <a class="botao" href="/web/clientes/novo">Novo cliente</a>
+    <br><br>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF/CNPJ</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+        <tr th:each="c : ${clientes}">
+            <td th:text="${c.idCliente}"></td>
+            <td th:text="${c.nomeCliente}"></td>
+            <td th:text="${c.cpfCnpj}"></td>
+            <td th:text="${c.telefone}"></td>
+            <td th:text="${c.email}"></td>
+            <td>
+                <a class="editar" th:href="@{/web/clientes/editar/{id}(id=${c.idCliente})}">Editar</a>
+                <a class="excluir" th:href="@{/web/clientes/excluir/{id}(id=${c.idCliente})}">Excluir</a>
+            </td>
+        </tr>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<div class="aviso sucesso" *ngIf="mensagem">{{ mensagem }}</div>
+<div class="aviso falha" *ngIf="erro">{{ erro }}</div>
+
+<!-- Listagem -->
+<section class="painel" *ngIf="!exibindoFormulario">
+  <div class="barra">
+    <h2>Entregas <small>({{ entregas.length }})</small></h2>
+    <div class="acoes-barra">
+      <input type="search" placeholder="Filtrar por projeto, status ou formato" [(ngModel)]="filtro" />
+      <button type="button" class="botao" (click)="novo()">+ Nova entrega</button>
+    </div>
+  </div>
+
+  <p class="vazio" *ngIf="carregando">Carregando...</p>
+
+  <table *ngIf="!carregando">
+    <thead>
+      <tr>
+        <th>ID</th><th>Projeto</th><th>Data</th><th>Formato</th><th>Status</th><th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of entregasFiltradas">
+        <td>{{ e.idEntrega }}</td>
+        <td>{{ e.projetoVideo?.tituloProjeto }}</td>
+        <td>{{ e.dataEntrega | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ e.formatoArquivo }}</td>
+        <td>{{ e.statusEntrega }}</td>
+        <td class="acoes">
+          <button type="button" class="botao pequeno" (click)="editar(e)">Editar</button>
+          <button type="button" class="botao pequeno excluir" (click)="excluir(e)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="vazio" *ngIf="!carregando && entregasFiltradas.length === 0">Nenhuma entrega encontrada.</p>
+</section>
+
+<!-- Cadastro e edição -->
+<section class="painel" *ngIf="exibindoFormulario">
+  <h2>{{ editandoId === null ? 'Nova entrega' : 'Editar entrega #' + editandoId }}</h2>
+  <form #f="ngForm" (ngSubmit)="salvar(f)">
+    <label>Projeto
+      <select name="idProjeto" [(ngModel)]="formulario.idProjeto" required #proj="ngModel">
+        <option [ngValue]="null" disabled>Selecione o projeto</option>
+        <option *ngFor="let p of projetos" [ngValue]="p.idProjeto">{{ p.tituloProjeto }}</option>
+      </select>
+      <small *ngIf="proj.invalid && proj.touched">Escolha o projeto.</small>
+    </label>
+    <label>Data da entrega
+      <input type="date" name="dataEntrega" [(ngModel)]="formulario.dataEntrega" required #dt="ngModel" />
+      <small *ngIf="dt.invalid && dt.touched">Informe a data.</small>
+    </label>
+    <label>Formato do arquivo
+      <select name="formatoArquivo" [(ngModel)]="formulario.formatoArquivo" required #fmt="ngModel">
+        <option value="" disabled>Selecione</option>
+        <option *ngFor="let x of formatos" [value]="x">{{ x }}</option>
+      </select>
+      <small *ngIf="fmt.invalid && fmt.touched">Escolha o formato.</small>
+    </label>
+    <label>Status
+      <select name="statusEntrega" [(ngModel)]="formulario.statusEntrega" required>
+        <option *ngFor="let x of status" [value]="x">{{ x }}</option>
+      </select>
+    </label>
+    <div class="botoes">
+      <button type="submit" class="botao" [disabled]="salvando">{{ salvando ? 'Salvando...' : 'Salvar' }}</button>
+      <button type="button" class="botao cinza" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</section>
